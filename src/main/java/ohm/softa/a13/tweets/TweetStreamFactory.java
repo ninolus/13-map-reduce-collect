@@ -65,7 +65,7 @@ public final class TweetStreamFactory {
         if (tweetSource == TweetSource.ONLINE && isTwitter4jConfigured) {
             return onlineTweetStreamGenerator;
         }
-        /* TODO return offline source generator */
+        /* return offline source generator */
 		return new OfflineTweetStreamGenerator();
     }
 
