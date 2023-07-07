@@ -1,5 +1,6 @@
 package ohm.softa.a13.tweets;
 
+import ohm.softa.a13.tweets.generators.OfflineTweetStreamGenerator;
 import ohm.softa.a13.tweets.generators.OnlineTweetStreamGenerator;
 import ohm.softa.a13.tweets.generators.TweetStreamGenerator;
 import org.apache.commons.lang3.NotImplementedException;
@@ -65,7 +66,7 @@ public final class TweetStreamFactory {
             return onlineTweetStreamGenerator;
         }
         /* TODO return offline source generator */
-        throw new NotImplementedException("TweetStreamFactory.getTweetsStream() is not implemented yet");
+		return new OfflineTweetStreamGenerator();
     }
 
     /**
