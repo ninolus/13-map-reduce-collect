@@ -98,9 +98,17 @@ public class TrumpTweetStats {
 	public static Map<String, Long> calculateSourceAppStats(Stream<Tweet> tweetStream) {
 		return tweetStream
 			/* transform every Tweet object to the plain source app name */
-			.map(Tweet::getSourceApp)
+			.map(Tweet::getSourceApp).reduce(new HashMap<>(), (collected, next) -> {
+				if (collected.get(next) != null) {
+					collected.put(next, collected.get(next)+1);
+				} else {
+					collected.put(next, 1L);
+				}
+				return collected;
+			}, (k,v) -> k); // keine ahnung warum (k,v) -> k benötigt wird und (k,v) -> v würde auch gehen...
 			/* collect the tweets in a map of String and Integer - short form of map-reduce */
-			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+			// schönere Alternative zu reduce wäre auch das hier:
+//			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	}
 
 	/**
