@@ -98,7 +98,9 @@ public class TrumpTweetStats {
 	public static Map<String, Long> calculateSourceAppStats(Stream<Tweet> tweetStream) {
 		return tweetStream
 			/* transform every Tweet object to the plain source app name */
-			.map(Tweet::getSourceApp).reduce(new HashMap<>(), (collected, next) -> {
+			.map(Tweet::getSourceApp)
+			// In der Methode eins weiter unten ist die Lösung, wie sie sauberer wäre mit Reduce
+			.reduce(new HashMap<>(), (collected, next) -> {
 				if (collected.get(next) != null) {
 					collected.put(next, collected.get(next)+1);
 				} else {
